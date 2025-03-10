@@ -1,0 +1,72 @@
+# Compiler files
+cache/
+out/
+broadcast/
+
+# Deps
+node_modules/
+lib/
+coverage/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Configs with secrets
+hardhat.config.*
+.vscode/
+**/config/*.local.ts
+**/config/local.*
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Lock files
+yarn.lock
+package-lock.json
+
+# OS or Editor folders
+.DS_Store
+.idea/
+.vscode/
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local deployments
+deployments/localhost/
+deployments/hardhat/
+
+# Coverage
+coverage/
+coverage.json
+
+# Typechain
+typechain/
+typechain-types/
+
+# Artifacts
+artifacts/
+dist/
+.next/
+build/
+
+# Cache directories
+.cache/
+
+# Any files containing private keys or secrets
+**/*private*.ts
+**/*private*.js
+**/*private*.json
+**/*secret*.ts
+**/*secret*.js
+**/*secret*.json
