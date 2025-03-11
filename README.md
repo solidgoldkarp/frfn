@@ -17,6 +17,7 @@ The SimpleBookieMarket is a minimalist prediction market with an intuitive desig
 2. **Probability**: Simply calculated as `YES bets / total bets`
 3. **Resolution**: Admin resolves the market after the resolution time
 4. **Redemption**: Winners redeem their original bet plus proportional share of losing side's collateral
+5. **Cancellation**: Markets can be cancelled by admin in case of ambiguous outcomes or other issues
 
 ## Project Structure
 
@@ -25,7 +26,7 @@ The SimpleBookieMarket is a minimalist prediction market with an intuitive desig
   - `SimpleBookieFactory.sol`: Factory for deploying bookie markets
   - `MockERC20Decimals.sol`: ERC20 token with configurable decimals for testing
 
-- `/frontend`: Next.js frontend application
+- `/frontend`: Next.js frontend application (in separate repo)
   - `/markets/simple`: Simple bookie-style market pages
 
 - `/script`: Deployment scripts
@@ -65,10 +66,21 @@ forge script script/DeploySimpleBookieMarket.s.sol --rpc-url https://testnet-rpc
 The frontend is built with Next.js and uses wagmi hooks for blockchain interactions.
 
 ```bash
-cd frontend/frontend
+cd frontend
 npm install
 npm run dev
 ```
+
+## Features & Roadmap
+
+- [x] Basic YES/NO betting
+- [x] Proportional payouts for winners
+- [x] Factory for creating markets
+- [x] Market cancellation and refunds
+- [ ] Multi-outcome markets (beyond binary YES/NO)
+- [ ] Fee structure for market creators
+- [ ] DAO governance for market resolution disputes
+- [ ] Integration with oracle services
 
 ## License
 
