@@ -21,6 +21,8 @@ contract SimpleBookieMarket {
     event BetPlaced(address indexed user, bool outcome, uint256 amount);
     event MarketResolved(bool outcome);
     event Redeemed(address indexed user, uint256 amount);
+    event MarketCanceled();
+    event Refunded(address indexed user, uint256 amount);
 
     constructor(
         string memory _question,
@@ -102,15 +104,15 @@ contract SimpleBookieMarket {
         require(!resolved, "Already resolved");
         
         resolved = true;
-        // Special case: neither YES nor NO wins, so everyone gets their money back
+        // Special case: cancelled market signals users to get refunds
+        emit MarketCanceled();
     }
     
     // If market is cancelled, this allows refunds
     function refund() external {
         require(resolved, "Not resolved");
         require(!redeemed[msg.sender], "Already redeemed");
-        require(outcome == false && totalYes > 0 && totalNo > 0, "Not a cancelled market");
-
+        
         uint256 refundAmount = yesBets[msg.sender] + noBets[msg.sender];
         require(refundAmount > 0, "Nothing to refund");
         
@@ -118,7 +120,7 @@ contract SimpleBookieMarket {
         bool success = collateralToken.transfer(msg.sender, refundAmount);
         require(success, "Transfer failed");
         
-        emit Redeemed(msg.sender, refundAmount);
+        emit Refunded(msg.sender, refundAmount);
     }
     
     // Testing-only function to resolve a market regardless of time

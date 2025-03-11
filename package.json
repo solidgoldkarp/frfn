@@ -1,0 +1,22 @@
+{
+  "name": "simple-prediction-markets",
+  "version": "1.0.0",
+  "description": "Simple bookie-style prediction markets with a comparison to AMM-based markets",
+  "main": "index.js",
+  "scripts": {
+    "test": "forge test",
+    "build": "forge build",
+    "deploy:monad": "forge script script/DeploySimpleBookieMarket.s.sol --rpc-url https://testnet-rpc.monad.xyz --broadcast -vvv"
+  },
+  "keywords": [
+    "prediction-markets",
+    "solidity",
+    "blockchain",
+    "monad"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
