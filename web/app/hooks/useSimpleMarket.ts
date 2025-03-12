@@ -24,7 +24,7 @@ export const useSimpleMarket = (marketAddress: `0x${string}` | undefined) => {
     enabled: !!marketAddress,
   });
   
-  const { data: totalYes } = useContractRead({
+  const { data: totalYes, refetch: refetchTotalYes } = useContractRead({
     address: marketAddress,
     abi: simpleBookieMarketAbi,
     functionName: 'totalYes',
@@ -32,7 +32,7 @@ export const useSimpleMarket = (marketAddress: `0x${string}` | undefined) => {
     watch: true,
   });
   
-  const { data: totalNo } = useContractRead({
+  const { data: totalNo, refetch: refetchTotalNo } = useContractRead({
     address: marketAddress,
     abi: simpleBookieMarketAbi,
     functionName: 'totalNo',
@@ -40,7 +40,7 @@ export const useSimpleMarket = (marketAddress: `0x${string}` | undefined) => {
     watch: true,
   });
   
-  const { data: probability } = useContractRead({
+  const { data: probability, refetch: refetchProbability } = useContractRead({
     address: marketAddress,
     abi: simpleBookieMarketAbi,
     functionName: 'currentProbability',
@@ -246,6 +246,16 @@ export const useSimpleMarket = (marketAddress: `0x${string}` | undefined) => {
   // Format probability from WAD (1e18) to percentage
   const formattedProbability = probability ? Number(formatUnits(probability as bigint, 18)) * 100 : 50;
   
+  // Function to refresh market data
+  const refreshMarketData = useCallback(async () => {
+    console.log("Refreshing market data");
+    await Promise.all([
+      refetchTotalYes(),
+      refetchTotalNo(),
+      refetchProbability()
+    ]);
+  }, [refetchTotalYes, refetchTotalNo, refetchProbability]);
+  
   return {
     // Market info
     question: question as string | undefined,
@@ -270,6 +280,7 @@ export const useSimpleMarket = (marketAddress: `0x${string}` | undefined) => {
     getRefund,
     forceResolveYes,
     forceResolveNo,
+    refreshMarketData,
     
     // Loading state
     isLoading,

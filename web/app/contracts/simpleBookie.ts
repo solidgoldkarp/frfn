@@ -5,9 +5,17 @@ import factoryAbi from './factoryAbi.json';
 export const simpleBookie = {
   monadTestnet: {
     // Current deployment using the official Monad testnet USDC
-    factory: '0x5629724E91Cd7acA2b5a0b7d809Cf4D05C749a6E',
+    factory: '0x16b35DECec3B0b6461917deE20039487618423C8',
     usdc: '0xf817257fed379853cDe0fa4F97AB987181B1E5Ea', // Official Monad testnet USDC
-    testMarket: '0xE23235FBdF65D316F225e0f13F4b71FbBF296C85'
+    markets: {
+      btcPrice: '0xB5599ac305D498Fc4a69b8606D0f15d573510ce6',
+      aiModel: '0xc281Ec0dba64aa2332D94D3E968b46752D2EEa95',
+      geopolitical: '0x4FAe92879Ed18fd4E0a935c38f597229df66C873',
+      sports: '0x3FdC864abed386f0f9Ee0dA49B5f98FaBE4aAFD9',
+      solanaAth: '0x7D9D07D3a2d7a4E15D3A8bfB301bB25c5908eAaF'
+    },
+    // Keep this for backward compatibility
+    testMarket: '0xB5599ac305D498Fc4a69b8606D0f15d573510ce6' // BTC price market
   }
 };
 

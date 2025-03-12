@@ -72,6 +72,4 @@ build/
 **/*secret*.json
 
 # Next.js
-.next/
-
-k# Next.js build outpu
+.next/# Next.js build outpu

@@ -62,6 +62,7 @@ const SimpleMarketCard: React.FC<SimpleMarketCardProps> = ({ marketAddress }) =>
     finalOutcome,
     placeBetYes,
     placeBetNo,
+    refreshMarketData,
     isLoading
   } = useSimpleMarket(marketAddress);
   
@@ -178,7 +179,11 @@ const SimpleMarketCard: React.FC<SimpleMarketCardProps> = ({ marketAddress }) =>
         <div className="space-y-3">
           <div className="grid grid-cols-2 gap-2">
             <Button 
-              onClick={async () => {
+              onClick={async (e) => {
+                // Stop event propagation to prevent the Link from capturing this click
+                e.stopPropagation();
+                e.preventDefault();
+                
                 if (!isConnected) return;
                 setIsApprovingOrBetting(true);
                 setTxStatus('betting');
@@ -212,7 +217,16 @@ const SimpleMarketCard: React.FC<SimpleMarketCardProps> = ({ marketAddress }) =>
                   
                   // Now place the bet
                   setTxStatus('betting');
-                  await placeBetYes(betAmount);
+                  const txResult = await placeBetYes(betAmount);
+                  
+                  // Wait for transaction to be mined
+                  if (txResult?.hash) {
+                    await publicClient.waitForTransactionReceipt({ hash: txResult.hash });
+                    
+                    // Refresh market data to show updated odds
+                    await refreshMarketData();
+                  }
+                  
                   setTxStatus('success');
                   
                   // Reset after 1.5 seconds
@@ -236,7 +250,11 @@ const SimpleMarketCard: React.FC<SimpleMarketCardProps> = ({ marketAddress }) =>
             </Button>
             
             <Button 
-              onClick={async () => {
+              onClick={async (e) => {
+                // Stop event propagation to prevent the Link from capturing this click
+                e.stopPropagation();
+                e.preventDefault();
+                
                 if (!isConnected) return;
                 setIsApprovingOrBetting(true);
                 setTxStatus('betting');
@@ -270,7 +288,16 @@ const SimpleMarketCard: React.FC<SimpleMarketCardProps> = ({ marketAddress }) =>
                   
                   // Now place the bet
                   setTxStatus('betting');
-                  await placeBetNo(betAmount);
+                  const txResult = await placeBetNo(betAmount);
+                  
+                  // Wait for transaction to be mined
+                  if (txResult?.hash) {
+                    await publicClient.waitForTransactionReceipt({ hash: txResult.hash });
+                    
+                    // Refresh market data to show updated odds
+                    await refreshMarketData();
+                  }
+                  
                   setTxStatus('success');
                   
                   // Reset after 1.5 seconds
@@ -333,7 +360,11 @@ const SimpleMarketCard: React.FC<SimpleMarketCardProps> = ({ marketAddress }) =>
                 </p>
                 <button 
                   className="w-full py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm font-medium"
-                  onClick={() => setTxStatus('idle')}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    setTxStatus('idle');
+                  }}
                 >
                   Got it
                 </button>
@@ -377,7 +408,11 @@ const SimpleMarketCard: React.FC<SimpleMarketCardProps> = ({ marketAddress }) =>
                 </p>
                 <button 
                   className="w-full mt-3 py-2 bg-black/30 hover:bg-black/50 text-white rounded-md text-sm font-medium"
-                  onClick={() => setTxStatus('idle')}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    setTxStatus('idle');
+                  }}
                 >
                   Dismiss
                 </button>
@@ -386,7 +421,15 @@ const SimpleMarketCard: React.FC<SimpleMarketCardProps> = ({ marketAddress }) =>
           )}
           
           {/* Link to market details */}
-          <Link href={`/markets/${marketAddress}`} className="block">
+          <Link 
+            href={`/markets/${marketAddress}`} 
+            className="block" 
+            onClick={(e) => {
+              // Allow this event to proceed normally
+              // but stop propagation to prevent the parent Link from capturing it
+              e.stopPropagation();
+            }}
+          >
             <Button variant="outline" className="w-full">
               View Details
             </Button>
@@ -395,7 +438,15 @@ const SimpleMarketCard: React.FC<SimpleMarketCardProps> = ({ marketAddress }) =>
       ) : (
         /* For resolved markets, just show the View Details button */
         <div>
-          <Link href={`/markets/${marketAddress}`} className="block">
+          <Link 
+            href={`/markets/${marketAddress}`} 
+            className="block"
+            onClick={(e) => {
+              // Allow this event to proceed normally
+              // but stop propagation to prevent the parent Link from capturing it
+              e.stopPropagation();
+            }}
+          >
             <Button variant="primary" className="w-full">
               View Details
             </Button>

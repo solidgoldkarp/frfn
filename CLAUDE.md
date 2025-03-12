@@ -24,8 +24,8 @@ forge script script/DeploySimpleBookieMarket.s.sol --rpc-url https://testnet-rpc
 
 ### Start frontend
 ```bash
-cd frontend/frontend
-npm run dev
+cd web
+yarn dev
 ```
 
 ## Project Structure
@@ -66,12 +66,15 @@ The SimpleBookieMarket is a straightforward prediction market that:
 
 ### Current Deployment (Using Official Monad Testnet USDC)
 - USDC: `0xf817257fed379853cDe0fa4F97AB987181B1E5Ea` (Official Monad testnet USDC)
-- SimpleBookieFactory: `0xdB146BE10C84EE31b6B7eB5dF91018158CC24612`
-- Test Market: `0x27497b50aF8f400f8457243FD2775fE71eec5825`
-- Deployment Transaction: `0xce918a4493edac3c7c1941b334e92dd6d89f108b99bce5e71b56017acf92e161`
-- Block: `7384791`
+- SimpleBookieFactory: `0x16b35DECec3B0b6461917deE20039487618423C8`
+- Markets:
+  - BTC Price: `0xB5599ac305D498Fc4a69b8606D0f15d573510ce6`
+  - AI Model: `0xc281Ec0dba64aa2332D94D3E968b46752D2EEa95`
+  - Geopolitical: `0x4FAe92879Ed18fd4E0a935c38f597229df66C873`
+  - Sports: `0x3FdC864abed386f0f9Ee0dA49B5f98FaBE4aAFD9`
+  - Solana ATH: `0x7D9D07D3a2d7a4E15D3A8bfB301bB25c5908eAaF`
 
-These contracts are configured in the frontend at `frontend/frontend/app/contracts/simpleBookie.ts`.
+These contracts are configured in the frontend at `web/app/contracts/simpleBookie.ts`.
 
 ## Frontend Integration Notes
 
