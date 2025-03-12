@@ -244,8 +244,7 @@ export const useSimpleMarket = (marketAddress: `0x${string}` | undefined) => {
   }, [forceResolveMarket]);
   
   // Format probability from WAD (1e18) to percentage
-  const formattedProbability = probability ? 
-    Number(formatUnits(probability as bigint, 18)) * 100 : 50;
+  const formattedProbability = probability ? Number(formatUnits(probability as bigint, 18)) * 100 : 50;
   
   return {
     // Market info

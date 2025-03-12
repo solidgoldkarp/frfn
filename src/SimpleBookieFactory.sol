@@ -21,7 +21,7 @@ contract SimpleBookieFactory {
     event MarketCreated(address indexed market, string question, uint256 resolutionTime);
 
     constructor(address _collateralToken) {
-        require(_collateralToken \!= address(0), "Invalid collateral token");
+        require(_collateralToken != address(0), "Invalid collateral token");
         owner = msg.sender;
         collateralToken = _collateralToken;
     }
@@ -54,7 +54,7 @@ contract SimpleBookieFactory {
     
     function setCollateralToken(address _collateralToken) external {
         require(msg.sender == owner, "Only owner can change collateral token");
-        require(_collateralToken \!= address(0), "Invalid collateral token");
+        require(_collateralToken != address(0), "Invalid collateral token");
         collateralToken = _collateralToken;
     }
 }

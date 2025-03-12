@@ -70,3 +70,8 @@ build/
 **/*secret*.ts
 **/*secret*.js
 **/*secret*.json
+
+# Next.js
+.next/
+
+k# Next.js build outpu
