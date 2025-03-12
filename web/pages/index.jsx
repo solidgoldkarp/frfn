@@ -1,3 +1,11 @@
+/**
+ * @title Simple Bookie Prediction Markets - Homepage
+ * @author SolidGoldKarp (SGM) <sgm@sent.com>
+ * 
+ * PROPRIETARY AND CONFIDENTIAL
+ * Copyright (c) 2025 SolidGoldKarp (SGM). All Rights Reserved.
+ * Unauthorized copying, modification, distribution, or use is strictly prohibited.
+ */
 import React from "react";
 import PageContainer from "../components/layout/PageContainer";
 

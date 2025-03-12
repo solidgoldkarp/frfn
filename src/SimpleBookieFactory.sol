@@ -1,4 +1,12 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
+/**
+ * @title SimpleBookieFactory
+ * @author SolidGoldKarp (SGM) <sgm@sent.com>
+ * 
+ * PROPRIETARY AND CONFIDENTIAL
+ * Copyright (c) 2025 SolidGoldKarp (SGM). All Rights Reserved.
+ * Unauthorized copying, modification, distribution, or use is strictly prohibited.
+ */
 pragma solidity ^0.8.10;
 
 import "./SimpleBookieMarket.sol";
@@ -13,7 +21,7 @@ contract SimpleBookieFactory {
     event MarketCreated(address indexed market, string question, uint256 resolutionTime);
 
     constructor(address _collateralToken) {
-        require(_collateralToken != address(0), "Invalid collateral token");
+        require(_collateralToken \!= address(0), "Invalid collateral token");
         owner = msg.sender;
         collateralToken = _collateralToken;
     }
@@ -46,7 +54,7 @@ contract SimpleBookieFactory {
     
     function setCollateralToken(address _collateralToken) external {
         require(msg.sender == owner, "Only owner can change collateral token");
-        require(_collateralToken != address(0), "Invalid collateral token");
+        require(_collateralToken \!= address(0), "Invalid collateral token");
         collateralToken = _collateralToken;
     }
 }

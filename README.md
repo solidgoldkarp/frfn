@@ -93,4 +93,10 @@ Then open [http://localhost:3000](http://localhost:3000) with your browser to se
 
 ## License
 
-MIT
+**PROPRIETARY AND CONFIDENTIAL**
+
+Copyright (c) 2025 SolidGoldKarp (SGM). All Rights Reserved.
+
+This code is proprietary and confidential. Unauthorized copying, modification, distribution, or use of this code, via any medium, is strictly prohibited without express written permission from SolidGoldKarp (SGM).
+
+See the LICENSE file for full terms.

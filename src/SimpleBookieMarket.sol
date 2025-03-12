@@ -1,4 +1,12 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
+/**
+ * @title SimpleBookieMarket
+ * @author SolidGoldKarp (SGM) <sgm@sent.com>
+ * 
+ * PROPRIETARY AND CONFIDENTIAL
+ * Copyright (c) 2025 SolidGoldKarp (SGM). All Rights Reserved.
+ * Unauthorized copying, modification, distribution, or use is strictly prohibited.
+ */
 pragma solidity ^0.8.10;
 
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -31,7 +39,7 @@ contract SimpleBookieMarket {
         address _admin
     ) {
         require(_resolutionTime > block.timestamp, "Resolution must be future");
-        require(_collateralToken != address(0), "Invalid collateral token");
+        require(_collateralToken \!= address(0), "Invalid collateral token");
         
         question = _question;
         collateralToken = IERC20(_collateralToken);
@@ -42,7 +50,7 @@ contract SimpleBookieMarket {
     function bet(bool _outcome, uint256 amount) external {
         require(block.timestamp < resolutionTime, "Betting closed");
         require(amount > 0, "Amount must be positive");
-        require(!resolved, "Market already resolved");
+        require(\!resolved, "Market already resolved");
 
         bool success = collateralToken.transferFrom(msg.sender, address(this), amount);
         require(success, "Transfer failed");
@@ -61,7 +69,7 @@ contract SimpleBookieMarket {
     function resolve(bool _outcome) external {
         require(msg.sender == admin, "Only admin can resolve");
         require(block.timestamp >= resolutionTime, "Too early");
-        require(!resolved, "Already resolved");
+        require(\!resolved, "Already resolved");
 
         outcome = _outcome;
         resolved = true;
@@ -71,7 +79,7 @@ contract SimpleBookieMarket {
 
     function redeem() external {
         require(resolved, "Not resolved");
-        require(!redeemed[msg.sender], "Already redeemed");
+        require(\!redeemed[msg.sender], "Already redeemed");
 
         uint256 userBet = outcome ? yesBets[msg.sender] : noBets[msg.sender];
         require(userBet > 0, "No winning bet");
@@ -101,7 +109,7 @@ contract SimpleBookieMarket {
     // Emergency function in case market needs to be cancelled
     function cancelMarket() external {
         require(msg.sender == admin, "Only admin can cancel");
-        require(!resolved, "Already resolved");
+        require(\!resolved, "Already resolved");
         
         resolved = true;
         // Special case: cancelled market signals users to get refunds
@@ -111,7 +119,7 @@ contract SimpleBookieMarket {
     // If market is cancelled, this allows refunds
     function refund() external {
         require(resolved, "Not resolved");
-        require(!redeemed[msg.sender], "Already redeemed");
+        require(\!redeemed[msg.sender], "Already redeemed");
         
         uint256 refundAmount = yesBets[msg.sender] + noBets[msg.sender];
         require(refundAmount > 0, "Nothing to refund");
@@ -127,7 +135,7 @@ contract SimpleBookieMarket {
     // This is specifically for testnet environments to allow easier testing
     function forceResolve(bool _outcome) external {
         require(msg.sender == admin, "Only admin can resolve");
-        require(!resolved, "Already resolved");
+        require(\!resolved, "Already resolved");
         
         outcome = _outcome;
         resolved = true;
