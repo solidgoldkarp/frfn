@@ -26,8 +26,11 @@ The SimpleBookieMarket is a minimalist prediction market with an intuitive desig
   - `SimpleBookieFactory.sol`: Factory for deploying bookie markets
   - `MockERC20Decimals.sol`: ERC20 token with configurable decimals for testing
 
-- `/frontend`: Next.js frontend application (in separate repo)
-  - `/markets/simple`: Simple bookie-style market pages
+- `/web`: Next.js frontend application
+  - `/pages`: Main application pages
+  - `/components`: UI components
+  - `/hooks`: React hooks for contract interactions
+  - `/contracts`: ABIs and contract addresses
 
 - `/script`: Deployment scripts
   - `DeploySimpleBookieMarket.s.sol`: Deploy bookie-style markets
@@ -35,8 +38,6 @@ The SimpleBookieMarket is a minimalist prediction market with an intuitive desig
 - `/test`: Test files
   - `SimpleBookieMarket.t.sol`: Tests for bookie-style markets
   - `SimpleBookieMarket.buying.t.sol`: Tests for buying YES/NO tokens
-
-- `/archive`: Previous AMM-based implementation (for reference)
 
 ## Deployment
 
@@ -61,15 +62,22 @@ forge test
 forge script script/DeploySimpleBookieMarket.s.sol --rpc-url https://testnet-rpc.monad.xyz --broadcast -vvv --private-key $PRIVATE_KEY
 ```
 
-## Frontend
+## Frontend Development
 
 The frontend is built with Next.js and uses wagmi hooks for blockchain interactions.
 
 ```bash
-cd frontend
+# Navigate to the web directory
+cd web
+
+# Install dependencies
 npm install
+
+# Run the development server
 npm run dev
 ```
+
+Then open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
 ## Features & Roadmap
 
@@ -77,6 +85,7 @@ npm run dev
 - [x] Proportional payouts for winners
 - [x] Factory for creating markets
 - [x] Market cancellation and refunds
+- [x] Web interface for market interaction
 - [ ] Multi-outcome markets (beyond binary YES/NO)
 - [ ] Fee structure for market creators
 - [ ] DAO governance for market resolution disputes
